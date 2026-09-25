@@ -560,43 +560,50 @@ html{ scroll-behavior: smooth; }
 .hero-split {
   position: relative;
   background: var(--green-deep);
-  left: 0;
-  right: 0;
   width: 100%;
-  min-height: 94vh;
+  min-height: 0;
   display: flex;
   align-items: center;
   overflow: hidden;
 }
 
-/* BAL: szöveg blokk – vertikálisan centrált */
-.hero-split-text {
-  flex: 0 0 auto;
-  width: 44%;
-  max-width: 560px;
-  padding: 80px 32px 100px max(60px, 6%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 22px;
+/* Közös, középre igazított konténer – egy vonalban a fejléccel */
+.hero-split-inner {
   position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 1160px;   /* = header .wrap, így a szöveg a logó alatt indul */
+  margin: 0 auto;
+  padding: 56px 28px 140px;
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: 56px;
+  align-items: center;
+}
+
+/* BAL: szöveg */
+.hero-split-text {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
 }
 
 .hero-split-text h1 {
-  font-size: 48px;
-  line-height: 1.14;
+  font-size: clamp(40px, 3.6vw, 60px);
+  line-height: 1.18;
   color: #fff;
   margin: 0;
+  white-space: normal;
 }
 .hero-split-text h1 em { font-style: normal; color: var(--yellow); }
 
 .hero-split-text .lead {
-  font-size: 16px;
+  font-size: 17px;
   color: rgba(255,255,255,0.85);
-  line-height: 1.6;
+  line-height: 1.65;
   margin: 0;
-  max-width: 460px;
+  max-width: 480px;
 }
 
 /* Statisztikák */
@@ -636,24 +643,20 @@ html{ scroll-behavior: smooth; }
 }
 .btn-ghost-dark:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
 
-/* JOBB: nagy felhő-blob, jobbra kilóg, vertikálisan centrált */
+/* JOBB: nagy felhő-blob, jobbra kicsit kilóg */
 .hero-split-img-wrap {
-  flex: 1 1 auto;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   position: relative;
-  height: 100%;
-  min-height: 94vh;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 0;
 }
 
 .hero-blob-frame {
   position: relative;
-  width: 62%;
-  max-width: 900px;
-  min-width: 560px;
-  aspect-ratio: 1 / 0.92;
-  margin-right: -6%;
+  width: calc(100% + clamp(28px, (100vw - 1160px) / 2 + 28px, 200px));
+  max-width: 700px;
+  aspect-ratio: 1 / 0.86;
+  margin-right: calc(-1 * clamp(28px, (100vw - 1160px) / 2 + 28px, 200px));
 }
 
 .hero-blob-imgbox {
@@ -702,28 +705,24 @@ html{ scroll-behavior: smooth; }
   bottom: -2px; left: 50%;
   transform: translateX(-50%);
   width: 140vw; min-width: 1400px;
+  height: 110px;            /* fix magasság – ne nőjön a képernyővel */
   z-index: 4; display: block;
 }
 
 /* Reszponzív */
-@media (max-width: 1100px) {
-  .hero-blob-frame { min-width: 440px; max-width: 700px; }
-}
 @media (max-width: 900px) {
-  .hero-split { flex-direction: column; min-height: auto; padding-top: 90px; }
-  .hero-split-text {
-    width: 100%; max-width: 100%;
-    padding: 24px 28px 20px;
-    align-items: center; text-align: center;
+  .hero-split { min-height: auto; }
+  .hero-split-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 90px 24px 130px;
+    text-align: center;
   }
+  .hero-split-text { align-items: center; }
   .hero-stats { margin: 0 auto; }
   .hero-split-actions { justify-content: center; }
-  .hero-split-img-wrap {
-    min-height: auto;
-    justify-content: center;
-    margin: 20px 0 90px;
-  }
-  .hero-blob-frame { min-width: 300px; width: 90%; margin-right: 0; }
+  .hero-split-img-wrap { justify-content: center; }
+  .hero-blob-frame { width: 100%; max-width: 520px; margin-right: 0; }
   .hero-badge { left: 4%; bottom: 6%; }
 }
 @media (max-width: 480px) {
@@ -901,3 +900,18 @@ html{ scroll-behavior: smooth; }
 /* ═══════════════ HERO SPLIT – KidJoy stílus ═══════════════ */
 
 
+
+/* Hero chip olvashatóság a zöld háttéren */
+.hero-split-text .chip {
+  align-self: flex-start;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 7px 14px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+@media (max-width: 900px) { .hero-split-text .chip { align-self: center; } }
+@media (max-width: 900px) { .hero-split .hf-deco { display: none; } }
