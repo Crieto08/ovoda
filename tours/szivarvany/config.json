@@ -1,0 +1,55 @@
+{
+  "id": "szivarvany",
+  "title": "Virtuális séta – Szivárvány Óvoda",
+  "firstScene": "room1",
+  "scenes": [
+    {
+      "id": "room1",
+      "title": "Folyosó",
+      "panorama": "../tura1/room1.jpg",
+      "thumb": "../tura1/room1_thumb.png",
+      "hotSpots": [
+        {
+          "pitch": -2,
+          "yaw": 119,
+          "sceneId": "room2",
+          "text": "Lépcsőház"
+        }
+      ]
+    },
+    {
+      "id": "room2",
+      "title": "Lépcsőház",
+      "panorama": "../tura1/room2.jpg",
+      "thumb": "../tura1/room2_thumb.png",
+      "hotSpots": [
+        {
+          "pitch": 0,
+          "yaw": 65,
+          "sceneId": "room3",
+          "text": "Szoba"
+        },
+        {
+          "pitch": -2,
+          "yaw": -133,
+          "sceneId": "room1",
+          "text": "Vissza: Folyosó"
+        }
+      ]
+    },
+    {
+      "id": "room3",
+      "title": "Szoba",
+      "panorama": "../tura1/room3.jpg",
+      "thumb": "../tura1/room3_thumb.png",
+      "hotSpots": [
+        {
+          "pitch": -5,
+          "yaw": -18,
+          "sceneId": "room2",
+          "text": "Vissza: Lépcsőház"
+        }
+      ]
+    }
+  ]
+}

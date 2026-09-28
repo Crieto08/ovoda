@@ -66,3 +66,23 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
   window.addEventListener('resize', ()=>{ if (window.innerWidth > 900) close(); });
 })();
+
+/* ---- Tagintézményeink legördülő ---- */
+(function navDropdown(){
+  document.querySelectorAll('.nav-dd').forEach(dd => {
+    const btn = dd.querySelector('.nav-dd-btn');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const open = dd.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+  document.addEventListener('click', e => {
+    document.querySelectorAll('.nav-dd.is-open').forEach(dd => {
+      if (!dd.contains(e.target)) { dd.classList.remove('is-open'); dd.querySelector('.nav-dd-btn').setAttribute('aria-expanded','false'); }
+    });
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') document.querySelectorAll('.nav-dd.is-open').forEach(dd => dd.classList.remove('is-open'));
+  });
+})();
